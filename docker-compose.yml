@@ -2,9 +2,11 @@ services:
   shopcheck:
     build: .
     restart: unless-stopped
-    # env_file: .env   <--- AUSKOMMENTIEREN, da SECRET_KEY in Portainer liegt
+    # env_file: .env
+    environment:
+      - SECRET_KEY=Glimpse0-Pendant6-Cupped0-Grafted0-Turtle9
     ports:
-      - "8080:8000"    # Linke Seite (8080) ist der Host-Port, rechte Seite (8000) muss 8000 bleiben!
+      - "8080:8000"
     volumes:
       - shopcheck_data:/data
 volumes:
