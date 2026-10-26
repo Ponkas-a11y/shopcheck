@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2 style="margin-top:0">Shop prüfen</h2>
+<p class="mut">Link aus TikTok, Instagram oder Anzeige einfügen. Die Prüfung dauert ca. 10–20 Sekunden.</p>
+<form method="post" action="/check" onsubmit="b=this.querySelector('button');b.disabled=true;b.textContent='Prüfe …'">
+<input type="hidden" name="csrf" value="{{ csrf() }}">
+<input name="url" placeholder="z. B. super-shop24.com" required autofocus><button>Prüfen</button></form></div>
+{% if rows %}<div class="card"><h3 style="margin-top:0">Letzte Prüfungen</h3><table>
+<tr><th>Domain</th><th>Score</th><th>Urteil</th>{% if g.user.is_admin %}<th>Nutzer</th>{% endif %}<th>Zeit</th></tr>
+{% for r in rows %}<tr><td><a href="/result/{{ r.id }}">{{ r.domain }}</a></td><td>{{ r.score }}</td><td>{{ r.verdict }}</td>
+{% if g.user.is_admin %}<td>{{ r.username }}</td>{% endif %}<td class="mut">{{ r.created|dt }}</td></tr>{% endfor %}</table></div>{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+<div class="score {{ r.verdict_key }}">{{ r.score }}<span class="mut" style="font-size:18px">/100</span></div>
+<div><h2 style="margin:0" class="{{ r.verdict_key }}">{{ r.verdict }}</h2>
+<div class="mut">{{ r.url }}{% if r.company %} · {{ r.company }}{% endif %} · {{ created|dt }}</div></div></div></div>
+{% for lvl, label in [("bad","🚩 Warnsignale"),("warn","⚠️ Auffälligkeiten"),("ok","✅ Positiv"),("info","ℹ️ Hinweise")] %}
+{% set items = r.findings|selectattr("level","equalto",lvl)|list %}
+{% if items %}<div class="card"><h3 style="margin-top:0">{{ label }}</h3>
+{% for f in items %}<div class="f"><div><b>{{ f.title }}</b>{% if f.detail %}<span>{{ f.detail }}</span>{% endif %}</div>
+{% if f.points %}<div class="pts">{{ "%+d"|format(f.points) }}</div>{% endif %}</div>{% endfor %}</div>{% endif %}{% endfor %}
+<div class="card"><h3 style="margin-top:0">🔎 Selbst nachprüfen</h3>
+{% for name, href in r.links %}<div><a href="{{ href }}" target="_blank" rel="noopener noreferrer">{{ name }}</a></div>{% endfor %}</div>
+<p class="mut">Automatische Indizien, kein Beweis. Ein hoher Score garantiert keine Seriosität, ein niedriger nicht automatisch Betrug. Bei Unsicherheit: nie per Vorkasse/Überweisung zahlen, möglichst PayPal oder Kreditkarte mit Käuferschutz.</p>
+<p><a href="/">← Neue Prüfung</a></p>
+{% endblock %}

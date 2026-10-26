@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShopCheck</title>
+<style>
+:root{--bg:#0f1419;--card:#1a2129;--fg:#e6e9ec;--mut:#8b96a1;--good:#3fb950;--warn:#d29922;--bad:#f85149;--acc:#4c9aff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid #263039}
+.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:18px}
+main{max-width:860px;margin:24px auto;padding:0 16px}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:16px}
+input{width:100%;padding:12px;border-radius:8px;border:1px solid #2f3b46;background:#0f1419;color:var(--fg);font-size:16px;margin:6px 0 12px}
+button{background:var(--acc);color:#fff;border:0;padding:12px 20px;border-radius:8px;font-size:16px;cursor:pointer}
+button:disabled{opacity:.6}button.link{background:none;color:var(--mut);padding:0;font-size:14px;text-decoration:underline}
+.flash{background:#3a2a10;border:1px solid var(--warn);padding:10px 14px;border-radius:8px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse}td,th{padding:8px 6px;text-align:left;border-bottom:1px solid #263039;font-size:14px}
+a{color:var(--acc)}.mut{color:var(--mut);font-size:14px}
+.score{font-size:56px;font-weight:800;line-height:1}.good{color:var(--good)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.f{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #263039}.f:last-child{border:0}
+.f b{display:block}.f span{color:var(--mut);font-size:14px}.pts{margin-left:auto;color:var(--mut);font-size:13px;white-space:nowrap}
+</style></head><body>
+<header><a class="logo" href="/">🛡️ ShopCheck</a>
+{% if g.user %}<span class="mut">{{ g.user.username }} ·
+<form method="post" action="/logout" style="display:inline"><input type="hidden" name="csrf" value="{{ csrf() }}" style="display:none"><button class="link">Abmelden</button></form></span>{% endif %}</header>
+<main>{% for m in get_flashed_messages() %}<div class="flash">{{ m }}</div>{% endfor %}{% block body %}{% endblock %}</main>
+</body></html>
