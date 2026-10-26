@@ -2,9 +2,9 @@ services:
   shopcheck:
     build: .
     restart: unless-stopped
-    #env_file: .env
+    # env_file: .env   <--- AUSKOMMENTIEREN, da SECRET_KEY in Portainer liegt
     ports:
-      - "8585:8600"   # hinter Reverse Proxy: "127.0.0.1:8080:8000"
+      - "8080:8000"    # Linke Seite (8080) ist der Host-Port, rechte Seite (8000) muss 8000 bleiben!
     volumes:
       - shopcheck_data:/data
 volumes:
