@@ -6,7 +6,7 @@ services:
     environment:
       - SECRET_KEY=Glimpse0-Pendant6-Cupped0-Grafted0-Turtle9
     ports:
-      - "8080:8000"
+      - "8585:8600"
     volumes:
       - shopcheck_data:/data
 volumes:
