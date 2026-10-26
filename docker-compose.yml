@@ -1,0 +1,11 @@
+services:
+  shopcheck:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8080:8000"   # hinter Reverse Proxy: "127.0.0.1:8080:8000"
+    volumes:
+      - shopcheck_data:/data
+volumes:
+  shopcheck_data:
